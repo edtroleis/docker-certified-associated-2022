@@ -251,18 +251,33 @@ docker service update --secret-add NEW_SECRET_NAME SERVICE_NAME
 
 
 # Docker compose
-- is well suited for development environments
-- will bring up services as specified in docker-compose.yml
+- It is well suited for development environments
+- It will bring up services as specified in docker-compose.yml
 
 ```
-docker-compose config     # valida o arquivo docker-compose.yaml
-docker-compose up -d      # start docker-compose
-docker-compose down
-netstat -tupan            # verifica as conexões de rede
+docker-compose config                   # check file docker-compose.yaml
+docker-compose up                       # start docker-compose
+docker compose up -d                    # start docker compose dettached
+docker compose up -d --build            # start docker compose creating a new image
+docker-compose down                     # stop and remove containers belong to docker-compose.yaml file
+docker compose ps                       # show docker composes running
+docker compose exec app bash            # access container
+docker compose exec -u root app bash    # access container with root user
+```
 
-exemplos
-  - docker-compose
-  - docker-compose2
+### Examples
+  - [ex001](./config_files/compose/ex001/)
+  - [ex002](./config_files/compose/ex002/)
+  - [ex003](./config_files/compose/ex003/)
+
+### Notes
+```
+netstat -tupan                          # list network connections
+whoami                                  # check current user on container
+cat /etc/passwd                         # check users on container
+command1 & command2                     # run commands together
+command1 && command2                    # run command1 first and then command2
+git config --global -l                  # list git config
 ```
 
 # Kubernetes
@@ -358,3 +373,6 @@ One of the benefits of kubernetes is that it supports multiple types of volumes
 - targetPort: is the port the container is running on
 - port: is the port the service is exposed on in the cluster
 - nodePort: is the port made avaiable to external consumers of the service
+
+# Examples
+  - [Kubernetes files](./config_files/kubernetes/)

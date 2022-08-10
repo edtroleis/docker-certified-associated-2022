@@ -4,12 +4,12 @@ Build once, use anywhere
 - Docker image is a file which contains all necessary dependency and configurations which are required to run application
 - Docker containers is basically a running instance an image
 
-## Listar imagens
+## List images
 ```
 docker image ls                                       # exibe imagens docker. Versão antiga -> docker images
 ```
 
-## Criar imagem a partir de Dockerfile
+## Create image from Dockerfile
 
 ### Dockerfile exemplo
 ```
@@ -25,14 +25,14 @@ RUN apt-get update && apt-get install -y stress && apt-get clean
 CMD stress --cpu 0.2 --vm-bytes 64M --vm 1
 ```
 
-### Build da imagem
+### Build image
 ```
 docker image build -t edtroleis/image001:1.0.0 .
 ```
 
-### Remover imagens
+### Remove images
 ```
-docker image prune                                        # remove todas imagens inválidas (dangling)
+docker image prune                                        # remove all invalid images (dangling)
 docker rmi IMAGE_NAME/IMAGE_ID
 docker image rm IMAGE_NAME/IMAGE_ID
 ```
@@ -70,7 +70,7 @@ Sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructio
 ## ENV
 Sets the environment variable <key> to the value <value>.
 
-Exemplo:
+Example:
 ```
 ENV NGINX 1.2
 RUN curl -SL http://example.com/web-$NGINX.tar.gz
@@ -128,3 +128,10 @@ docker image ls --filter "dangling=false"
 Docker image is built up from a series of layers and each layer represents an instruction in the image's Dockerfile.
 Entrypoint is a command that will be executed anytime a container is created using the image
 
+# Examples
+  - [ex001](./config_files/images/ex001/)
+  - [ex002](./config_files/images/ex002/)
+  - [ex003](./config_files/images/ex003/)
+  - [ex004](./config_files/images/ex004/)
+  - [ex005](./config_files/images/ex005/)
+  - [ex006](./config_files/images/ex006/)
