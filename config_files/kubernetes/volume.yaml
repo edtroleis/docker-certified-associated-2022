@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+    - name: myapp
+      image: nginx
+      volumeMounts:
+        - mountPath: /data
+          name: myvolume
+  volumes:
+    - name: myvolume
+      hostPath:
+        path: /mydata
+        type: Directory
