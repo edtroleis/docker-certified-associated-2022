@@ -60,9 +60,74 @@ Allows to tell the plataform on how to test that our application is healthy. Whe
 
 HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost/ exit 1
 
+## CMD
+You can set default commands with parameters using the CMD instruction. If you run a Docker container without specifying any additional CLI commands, the CMD instruction will be executed. You can include an executable as the default command.
+
+```
+CMD echo "Command in Shell Form"
+CMD ["/bin/bash", "-c", "echo Command in Exec Form"]
+```
+
 ## ENTRYPOINT
 The best use for ENTRYPOINT is to set the image's main command.
 ENTRYPOINT doesn't allow you to override the command
+
+The ENTRYPOINT instruction looks almost similar to the CMD instruction. However, the main highlighting difference between them is that it will not ignore any of the parameters that you have specified in the Docker run command (CLI parameters).
+
+When we have specified the ENTRYPOINT instruction in the executable form, it allows us to set or define some additional arguments/parameters using the CMD instruction in Dockerfile. If we have used it in the shell form, it will ignore any of the CMD parameters or even any CLI arguments.
+
+```
+ENTRYPOINT echo "Command in Shell Form"
+ENTRYPOINT ["/bin/bash", "-c", "echo Command in Exec Form"]
+```
+
+If use ENTRYPOINT and CMD in the same Dockerfile you must use both commands with exec form
+
+```
+ENTRYPOINT ["COMMAND1"]
+CMD ["COMMAND2"]
+```
+
+## CMD vs ENTRYPOINT
+Using a CMD command, you will be able to set a default command. This will be executed if you run a particular container without specifying some command. In case you specify a command while running a docker container, the default one will be ignored. Note that if you specify more than one CMD instruction in your dockerfile, only the last one will be executed.
+
+```
+CMD <command> parameter1, parameter2 …. (Shell form)
+CMD [“executable command”, “parameter1”, “parameter2”, ….] (executable form)
+CMD [“parameter1”, “parameter2”]
+```
+
+The third way is used to set some additional default parameters that will be inserted after the default parameters when you are using an ENTRYPOINT in executable form and if you run the container without specifying any arguments in the command line.
+
+Consider the command below inside a dockerfile.
+
+CMD echo “TutorialsPoint”
+The output if you run it without specifying arguments (docker run -it image_name) will be -
+
+TutorialsPoint
+If you run it by specifying CLI arguments (docker run -it image_name /bin/bash), it will simply open a bash.
+
+ENTRYPOINT looks similar to a CMD command. However, the difference is that it does not ignore the parameters when you run a container with CLI parameters. The two forms of ENTRYPOINT command are -
+
+```
+ENTRYPOINT <command> parameter1, parameter2, … (It is shell form)
+ENTRYPOINT [“executable command”, “parameter1”, “parameter2”, ….] (Executable form)
+```
+
+When you use an executable form of ENTRYPOINT command, it will allow you to set additional parameters using CMD command. If you use it in shell form, it will ignore CMD parameters or any CLI arguments.
+
+Consider the example below.
+
+```
+ENTRYPOINT [“/bin/echo”, “ENTRYPOINT_INSTRUCTION”]
+CMD [“CMD_INSTRUCTION”]
+```
+
+If you try to run the container without specifying any CLI arguments (docker run -it image_name), output will be - "ENTRYPOINT_INSTRUCTION CMD_INSTRUCTION"
+
+If you specify CLI arguments (docker run -it image_name NewParameter), output will be - "ENTRYPOINT_INSTRUCTION NewParameter".
+
+To conclude, if you want to specify default arguments and want it to be overwritten on specifying CLI arguments, use CMD commands. And if you want to run a container with the condition that a particular command is always executed, use ENTRYPOINT. RUN is simply used to build additional image layers over the base image.
 
 ## WORKDIR
 Sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile

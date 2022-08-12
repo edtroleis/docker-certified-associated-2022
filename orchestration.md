@@ -261,6 +261,7 @@ docker compose up -d                    # start docker compose dettached
 docker compose up -d --build            # start docker compose creating a new image
 docker-compose down                     # stop and remove containers belong to docker-compose.yaml file
 docker compose ps                       # show docker composes running
+docker-compose rm                       # remove configuration
 docker compose exec app bash            # access container
 docker compose exec -u root app bash    # access container with root user
 ```
