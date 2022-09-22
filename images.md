@@ -40,15 +40,15 @@ docker image rm IMAGE_NAME/IMAGE_ID
 ## COPY vs ADD
 COPY takes in a src and destination. It only lets you copy in a local file or directory from our host
 
-ADD lets you do that too, but it also suports 2 other sources.
+ADD lets you to the same, but it also suports 2 other sources.
 - you can use a url instead of a local file/directory
 - you can extract a tar file from the source directly into the destination
 
 ## EXPOSE
-Informs Docker that the container listens on the specified network ports at runtime. It doesn't actually publish the port.
+It informs Docker that the container listens on the specified network port at runtime. It doesn't actually publish the port.
 
 ## HEALTHCHECK
-Allows to tell the plataform on how to test that our application is healthy. When Docker starts a container, it monitors the process that the conainer runs. if the process ends, the containers exits. That's just a basic check and does not necessarily tell the detail about the application.
+It allows to tell the plataform on how to test that our application is healthy. When Docker starts a container, it monitors the process that the container runs. If the process ends, the container exits. That's just a basic check and does not necessarily tell the detail about the application.
 
 --interval=DURATION (default 30s)
 
