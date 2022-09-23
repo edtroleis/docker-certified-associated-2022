@@ -5,7 +5,7 @@
 ```
 docker container run -p 8080:80 -d nginx
 
-localhost:8080                                        # página nginx
+localhost:8080                                        # nginx page
 ```
 
 ## List containers
@@ -15,7 +15,7 @@ docker container ls                                   # show execution container
 docker container ls -a                                # list all containers. Old version -> docker ps -a
 ```
 
-## Create and run a container
+## Create, run and exec commands
 
 ```
 docker container run hello-world                      # create and run a container, if doesn't exit the image hello-world this is downloaded from docker registry. Old version -> docker run hello-world
