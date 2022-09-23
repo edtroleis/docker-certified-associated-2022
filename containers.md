@@ -149,3 +149,11 @@ docker container run -dt --name container1 --cpuset-cpus=0,1 nginx /bin/bash    
 
 free -m                                                                                 # check linux memory
 ```
+
+## Docker commit
+
+By default, the container being committed and its processes will be paused while the image is committed.
+
+```
+docker container commit CONTAINER_ID IMAGE_NAME
+```
