@@ -1,4 +1,6 @@
+# Build muilt-stage
 # docker image build -t test-go-multi:1.0.0 .
+# docker container run test-go-multi:1.0.0
 
 FROM golang AS builder
 

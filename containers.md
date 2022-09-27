@@ -27,6 +27,9 @@ docker run --rm -v /foo busybox                       # volume will be removed a
 docker container run -d -m 128M --cpus 0.5 nginx      # create, run and set resource limit to the container
 docker container create ubuntu                        # only create the container
 docker container exec -ti CONTAINER_ID COMANDO        # run a command in a running container
+docker container exec -it CONTAINER_ID /bin/bash
+docker container run -d -p 8080:80 apache:1.0.0       # run container and attach host port 8080 with container port 80
+docker container run -it -P                           # run container using container expose port and attach with host random port
 ```
 
 ## Connect to container main process
@@ -126,13 +129,6 @@ docker ... --memory ... IMAGE_NAME        # -m
 docker ... --cpus ... IMAGE_NAME
 docker ... --publish ... IMAGE_NAME       # -p
 docker ... --mount ... IMAGE_NAME
-```
-
-## A container calling another volume container
-
-```
-docker run -d --name analytics --mount type=volume,src=data,dst=/data nginx
-docker run -d --name reports --volumes-from=analytics nginx
 ```
 
 # Reservation and limits

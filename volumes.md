@@ -55,8 +55,15 @@ docker container run -d -p 5432:5432 --name postgres1 --mount type=volume,src=db
 docker container run -d -p 5433:5432 --name postgres2 --mount type=volume,src=dbdados,dst=/data -e POSTGRESQL_USER=docker -e POSTGRES_PASSWORD=docker -e POSTGRESQL_DB=docker postgres
 ```
 
-## Backup de um volume
+## Volume backup
 ```
 mkdir /opt/backup
 docker container run -it --mount type=volume,src=dbdados,dst=/data --mount type=bind,src=/opt/backup,dst=/backup debian tar -zcvf /backup/bkp.tar.gz /data
+```
+
+## Container calling another volume container
+
+```
+docker run -d --name analytics --mount type=volume,src=data,dst=/data nginx
+docker run -d --name reports --volumes-from=analytics nginx
 ```
