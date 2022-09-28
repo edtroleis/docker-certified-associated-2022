@@ -34,7 +34,7 @@ docker swarm join-token manager                       # get token to add manager
 docker swarm join --token MANAGER_TOKEN IP_ADDRESS    # add node as manager on cluster
 
 docker node ls                                        # list nodes
-docker node update --label-add LABEL                  # add or update a node label
+docker node update --label-add LABEL NODE_ID          # add or update a node label
 
 docker swarm ca --rotate                              # generate a new root CA certificate and root CA key for the swarm cluster
 ```
@@ -58,7 +58,7 @@ docker service rollback SERVICE_NAME                          # roll back to the
 docker service create --limit-cpu 2 ...
 docker service create --limit-memory 2048 ...
 
-docker service create --name dns-cache -p 53:53/udp dns-cache # create a service listen on port 53 using the UDP protocol
+docker service create --name dns-cache -p 53:53/udp as207960/dns-cache:25 # create a service listen on port 53 using the UDP protocol
 
 docker service update --image nginx web-server                # image service will be updated to nginx
 ```
@@ -77,14 +77,13 @@ docker service ps antivirus
 docker service create --name webserver --replicas 2 nginx     # create a service with 2 replicas
 docker service ls                                             # list services
 docker service ps webserver                                   # list task of webserver service
-docker node update --availability drain NODE_NAME             # change the node Availability to Drain. os containers desse node serão recriados em outros nodes e o node não estará disponível
-docker node update --availability active NODE_NAME            # change the node Availability To Active. ativa novamente o node
+docker node update --availability drain NODE_NAME             # change the node availability to drain. the containers on this node will be created on active nodes and this node will be unavailable
+docker node update --availability active NODE_NAME            # change the node availability to active
 
-docker node update --availability {drain, pause, active}      # atualiza o status do node
-- drain: remove todos os containers do node atual para um novo node
-- pause: nada acontece com os containers presentes no node, porém nenhum container será criado no node
-- active: node recebe novos containers
-
+docker node update --availability {drain, pause, active}      # update node status
+- drain: remove all containers from current node to new nodes
+- pause: nothing happen with containers on current node, but none container will be created on current node
+- active: active to receive new containers
 ```
 
 ## Inspect swarm services and nodes
