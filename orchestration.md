@@ -13,7 +13,7 @@ Manager node has many responsibility within swarm:
 - serving swarm mode http api endpoints
 using a raft implementation, the managers maintain a consistent internal state of the entire swarm and all the services running on it
 - Docker recommends you implement an odd number of nodes according to your organization's high-availability requirements
-- an n manager cluster tolarates the loss of at most (n-1)/2 managers
+- an n manager cluster tolarates the loss of at most (n-1)/2 managers. Manager up nodes must be > 50% to cluster stay up.
 - default address pool used by swarm for global scope overlay network: 10.0.0.1/8
 
 ```
@@ -21,11 +21,11 @@ docker swarm init                                     # start swarm
 docker swarm init --advertise-addr MANAGER_IP         # create cluster swarm with explicity network interface
 docker swarm init --advertise-addr 127.0.0.1          # create cluster swarm with explicity network interface
 
-docker swarm leave                                    # node leave swarm
-docker swarm leave --force                            # manager leave the cluster
+docker swarm leave                                    # node leaves the cluster
+docker swarm leave --force                            # manager leaves the cluster
 
-docker node promote NODE                              # definir como manager
-docker node demote NODE                               # remover como manager
+docker node promote NODE                              # set node as manager
+docker node demote NODE                               # remove node as manager
 
 docker swarm join-token worker                        # obtém token do worker
 docker swarm join --token WORKER_TOKEN IP_ADDRESS     # add node as worker on cluster
