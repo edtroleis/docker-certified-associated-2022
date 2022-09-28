@@ -16,7 +16,7 @@ docker system info                          # display system-wide information/da
 docker system prune                         # remove unused data
 ```
 
-# Read env variables
+# Read env variables on Linux
 ```
 eval "$(<env.sh)
 ```
