@@ -27,10 +27,10 @@ docker swarm leave --force                            # manager leaves the clust
 docker node promote NODE                              # set node as manager
 docker node demote NODE                               # remove node as manager
 
-docker swarm join-token worker                        # obtém token do worker
+docker swarm join-token worker                        # get token to add worker node
 docker swarm join --token WORKER_TOKEN IP_ADDRESS     # add node as worker on cluster
 
-docker swarm join-token manager                       # obtém token do manager
+docker swarm join-token manager                       # get token to add manager node
 docker swarm join --token MANAGER_TOKEN IP_ADDRESS    # add node as manager on cluster
 
 docker node ls                                        # list nodes
