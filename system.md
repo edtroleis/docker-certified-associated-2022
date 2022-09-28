@@ -18,17 +18,18 @@ docker system prune                         # remove unused data
 
 # Read env variables on Linux
 ```
-eval "$(<env.sh)
+eval "$(<env.sh)"
 ```
 
-# Namespaces (process isolation)
-docker uses a technology called namespaces to provide the isolated work space called the container. These namespaces provide a layer of isolation. each aspect of a container runs in a separate namespace and its access is limited to that namespace
+# Linux kernel modules
+## Namespaces (process isolation)
+docker uses a technology called namespaces to provide the isolated workspace called the container. These namespaces provide a layer of isolation. each aspect of a container runs in a separate namespace and its access is limited to that namespace
 
-# Control groups, cgroups (resources isolation)
+## Control groups, cgroups (resources isolation)
 cgroups is a linux kernel feature that limits, accounts for, and isolates the resource usage (cpu, memory, disk i/o, network, etc) of a collection of processes.
 
-# Netfilter
-módulo kernel Linux responsável por criar portas, redirects e boa parte das tarefas de roteamento de pacotes
+## Netfilter
+Kernel module responsible for create ports, redirects and many package route tasks
 
 # Logging drivers in docker
 - json-file
@@ -41,7 +42,7 @@ módulo kernel Linux responsável por criar portas, redirects e boa parte das ta
 
 The docker logs command is not available for drivers other than json-file and journald
 
-# Docker daemon configuration
+# Docker daemon configuration paths
 ```
 /etc/docker/daemon.json       # docker configuration file
 /var/lib/docker               # docker home
