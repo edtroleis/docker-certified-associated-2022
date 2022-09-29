@@ -118,15 +118,40 @@ curl -v localhost:8080
 - docker stack is more suited for production environment
 - docker stack can be used to manage multiple services
 
+Example: https://docs.docker.com/engine/swarm/stack-deploy/
+[stack](./config_files/stack/)
+
+### Test app with compose
 ```
-docker stack deploy --compose-file docker-compose.yml stack1        # create a stack
-docker stack ls                                                     # list stacks
-docker stack rm stack1                                              # remove stack
+docker-compose up -d            # start app
+docker-compose ps               # check app
+curl http://localhost:8000      # test app
+docker-compose down --volumes   # bring the app down
+```
+
+### Deploy the stack to the swarm
+```
+docker stack deploy --compose-file docker-compose.yml stackdemo     # create a stack
+docker stack services stackdemo                                     # check status
+curl http://localhost:8000                                          # test app
+docker stack rm stackdemo                                           # remove stack
 ```
 
 ## Backup
 ```
-cp /var/lib/docker/swarm
+sudo -s
+cd /var/lib/docker/swarm
+tar -zcvf swarm_backup.tar.gz *
+docker swarm init --force-new-cluster
+```
+
+## Restore
+```
+sudo -s
+cd /var/lib/docker/swarm
+rm -rf *
+cp swarm_backup.tar.gz /var/lib/docker/swarm
+tar -zxvf swarm_backup.tar.gz
 docker swarm init --force-new-cluster
 ```
 
@@ -208,13 +233,13 @@ cluster size  majority  fault tolerance
 - UDP 4789: overlay network traffic
 
 ```
-docker network create -d overlay -o encrypted=true                                          # overlay traffic between service tasks will be encrypted
-docker service update --network-add                                                         # add a network to a service
+docker network create -d overlay -o encrypted=true myoverlay                                  # overlay traffic between service tasks will be encrypted
+docker service update --network-add NETWORK_NAME SERVICE_NAME                                 # add a network to a service
 
-docker network create -d overlay NETWORK_NAME                                               # cria uma rede
-docker service create --network nome_da_rede nome_do_servico                                # cria um servico com uma rede
-docker service update --network-add nome_da_rede nome_do_servico                            # adiciona uma rede a um determinado service
-docker service create -p 80:80 --network my_overlay --constraint "node.role==worker" nginx  # creates a service using my_overlay network with constraints
+docker network create -d overlay NETWORK_NAME                                                 # cria uma rede
+docker service create --network NETWORK_NAME SERVICE_NAME                                     # cria um servico com uma rede
+docker service update --network-add NETWORK_NAME SERVICE_NAME                                 # adiciona uma rede a um determinado service
+docker service create -p 80:80 --network NETWORK_NAME --constraint "node.role==worker" nginx  # creates a service using my_overlay network with constraints
 ```
 
 ### Create overlay network on Docker standalone
