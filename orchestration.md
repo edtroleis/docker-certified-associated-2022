@@ -118,8 +118,9 @@ curl -v localhost:8080
 - docker stack is more suited for production environment
 - docker stack can be used to manage multiple services
 
-Example: https://docs.docker.com/engine/swarm/stack-deploy/
-[stack](./config_files/stack/)
+### Example
+- https://docs.docker.com/engine/swarm/stack-deploy/
+- [stack](./config_files/stack/)
 
 ### Test app with compose
 ```
