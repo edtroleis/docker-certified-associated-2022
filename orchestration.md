@@ -244,14 +244,14 @@ docker service create -p 80:80 --network NETWORK_NAME --constraint "node.role==w
 
 ### Create overlay network on Docker standalone
 ```
-docker network create --driver overlay --attachable my_overlay_attachable
-docker run --network my_overlay_attachable --name webserver nginx bash
+docker network create --driver overlay --attachable myoverlay_attach
+docker run --network myoverlay_attach --name webserver -d nginx
 ```
 
 
 ## Secrets
-- São usadas apenas em swarm
-- São criadas apenas em manager nodes
+- Used only on Swarm
+- They are created only on manager nodes
 
 ```
 docker secret create SECRET_NAME FILE_WITH_PWD        # create secret
