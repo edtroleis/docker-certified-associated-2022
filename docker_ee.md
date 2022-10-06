@@ -1,5 +1,5 @@
 # What is UCP and DTR in Docker?
-Docker trusted registry or simply Docker registry is an enterprise offering from Docker. The most common terminology that you will hear with Docker Enterprise Edition is DTR and UCP (universal control plane).
+Docker Trusted Registry or simply Docker Registry is an enterprise registry offering from Docker. The most common terminology that you will hear with Docker Enterprise Edition is DTR and UCP (Universal Control Plane).
 - minimum 3 nodes to achieve high-availability
 
 # What is UCP in docker?
@@ -9,8 +9,8 @@ Docker Universal Control Plane (UCP) is the enterprise-grade cluster management 
 
 ## Order to backup Docker EE
 1. backup swarm
-2. ucp (do not save: overlay networks; configs, secrets; services)
-3. dtr (do not save: image content; users, orgs, teams; database vulnerability)
+2. UCP (do not save: overlay networks; configs, secrets; services)
+3. DTR (do not save: image content; users, orgs, teams; database vulnerability)
 
 ## Backup UCP manager node
 ```

@@ -42,6 +42,19 @@ docker node update --label-add LABEL NODE_ID          # add or update a node lab
 docker swarm ca --rotate                              # generate a new root CA certificate and root CA key for the swarm cluster
 ```
 
+## How it works
+
+0. API
+<br>
+1. orchestrator: reconciliation loop that creates tasks for service objects
+<br>
+2. allocator: allocator ip address
+<br>
+3. dispatcher: assign tasks to nodes
+<br>
+4. scheduler: instruct a worker to run a tasks
+
+
 ## Replicated Service
 
 A service is a definition of tasks to execute on the manager or worker nodes.
@@ -65,6 +78,8 @@ docker service create --limit-memory 2048 ...
 docker service create --name dns-cache -p 53:53/udp as207960/dns-cache:25 # create a service listen on port 53 using the UDP protocol
 
 docker service update --image nginx web-server                # image service will be updated to nginx
+
+docker service create --limit-memory 4GB --reserve-memory 2GB --name webserver nginx
 ```
 
 ## Global service
@@ -439,6 +454,38 @@ One of the benefits of kubernetes is that it supports multiple types of volumes
 - targetPort: is the port the container is running on
 - port: is the port the service is exposed on in the cluster
 - nodePort: is the port made avaiable to external consumers of the service
+
+## PV and PVC
+
+A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by server/storage/cluster administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like node.
+
+Dynamic volume provisioning allows storage volumes to be chreated on-demand. Without dynamic provisioning, cluster adm have to manually make calls to their cloud or storage providers to create new storage volumes, and then create PV objects to represent them in kubernetes. The dynamic provisioning feature eliminates the needs for cluster adm to pre-provision storage. Instead, it automatically provisions storage when it is requested by users.
+
+<br>
+A PersistentVolumeClaim (PVC) is a request for storage by a user which can be attained from PV. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany or ReadWriteMany.
+
+### Short and Simple
+
+Persistent Volume - Available storage let's say you have 100Gi
+Persistent Volume Claim - You request from Persistent Volume, let's say you request 10Gi you'll get it but if you request 110Gi you won't get it.
+
+## CronJob
+
+kubectl create -f cronjob1.yaml
+kubectl get cronjobs.batch
+
+## maxSurge
+
+The number of pods that can be created above the desired amount of pods during an update. This can be an absolute number or precentage of the replicas count. The default is 25%
+
+## maxUnavailable
+
+The number of pods that can be unavailable during the update process
+
+## liveness, readiness and startup probes
+- liveness: is used by kubelet to know when restart a container
+- readiness: when a container is ready to start accepting traffic
+- startup: used to know when a container application has started
 
 # Examples
 
