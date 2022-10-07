@@ -22,10 +22,12 @@ docker container run \
 ```
 
 # Install Docker EE
-- Url to installing Docker EE can be obtained from Docker Hub
-- All nodes must be a worker node managed by Universal Control Plan (UCP)
+- Url to installing Docker EE can be obtained from Docker Hub/Store
+- All nodes in DTR must be a worker node managed by Universal Control Plan (UCP)
 - Endpoint to check UCP health: https://_ping
+- Endpoint to check DTR health: https://health
 - UCP-agents runs on both manager and worker nodes
+- UCP-agent service autommatically starts serving all UCP components in manager node and all proxy service in worker node
 
 # Objects and definitions
 - Grant = subject + role + resource set

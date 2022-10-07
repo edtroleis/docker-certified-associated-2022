@@ -477,7 +477,7 @@ kubectl get cronjobs.batch
 
 ## maxSurge
 
-The number of pods that can be created above the desired amount of pods during an update. This can be an absolute number or precentage of the replicas count. The default is 25%
+The number of pods that can be created above the desired amount of pods during an update. This can be an absolute number or percentage of the replicas count. The default is 25%
 
 ## maxUnavailable
 
