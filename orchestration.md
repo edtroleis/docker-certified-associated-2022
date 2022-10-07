@@ -467,7 +467,7 @@ A PersistentVolumeClaim (PVC) is a request for storage by a user which can be at
 
 Persistent Volume - Available storage let's say you have 100Gi
 <br>
-Persistent Volume Claim - You request from Persistent Volume, let's say you request 10Gi you'll get it but if you request 110Gi you won't get it.
+Persistent Volume Claim - You request from Persistent Volume, let's say you request 10Gi. You'll get it but if you request 110Gi you won't get it.
 
 ## CronJob
 
