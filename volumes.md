@@ -8,7 +8,7 @@ I have a directory and I want this directory to be mounted in the container. The
 
 ```
 mkdir /opt/dir1
-docker container run -it --mount type=bind,src=/opt/dir1:dest=/opt/dir1 ubuntu /bin/bash
+docker container run -it --mount type=bind,src=/opt/dir1,dest=/opt/dir1 ubuntu /bin/bash
 ```
 
 ## Volume
