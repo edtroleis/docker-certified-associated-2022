@@ -470,9 +470,10 @@ Persistent Volume - Available storage let's say you have 100Gi
 Persistent Volume Claim - You request from Persistent Volume, let's say you request 10Gi. You'll get it but if you request 110Gi you won't get it.
 
 ## CronJob
-
+```
 kubectl create -f cronjob1.yaml
 kubectl get cronjobs.batch
+```
 
 ## maxSurge
 
