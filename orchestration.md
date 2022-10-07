@@ -103,7 +103,7 @@ docker node update --availability active NODE_NAME            # change the node 
 
 docker node update --availability {drain, pause, active}      # update node status
 - drain: remove all containers from current node to new nodes
-- pause: nothing happen with containers on current node, but none container will be created on current node
+- pause: nothing happens with containers on current node, but none container will be created on current node
 - active: active to receive new containers
 ```
 
@@ -192,7 +192,7 @@ docker swarm init --force-new-cluster
 docker service create \
   --name webserver \
   --replicas 5 \
-  --constraint node.labels.region=east \
+  --constraint node.labels.region==east \
   nginx
 ```
 
@@ -200,13 +200,13 @@ docker service create \
 docker service create \
   --name webserver \
   --replicas 5 \
-  --placement-pref 'spread=node.labels=datacenter' \
+  --placement-pref 'spread=node.labels==datacenter' \
   nginx
 ```
 
 ## Locking the swarm cluster
 
-Swarm cluster contains lot of sensitive informartion.
+Swarm cluster contains lot of sensitive information.
 
 - tls key used to encriypt communication among swarm nodes.
 - keys used to encrypt and decrypt the raft logs on disk.
@@ -386,7 +386,7 @@ kubectl describe pod POD_NAME
 ## replicasets
 
 A replicaset purpose is to maintain a stable set of replica pods running at any given time.
-Replicasets works well in basic functionality like managing pods, scaling pods and similar.
+Replicasets work well in basic functionality like managing pods, scaling pods and similar.
 
 ```
 kubectl apply -f https://kubernetes.io/examples/controllers/frontend.yaml
@@ -459,14 +459,14 @@ One of the benefits of kubernetes is that it supports multiple types of volumes
 
 A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by server/storage/cluster administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like node.
 
-Dynamic volume provisioning allows storage volumes to be chreated on-demand. Without dynamic provisioning, cluster adm have to manually make calls to their cloud or storage providers to create new storage volumes, and then create PV objects to represent them in kubernetes. The dynamic provisioning feature eliminates the needs for cluster adm to pre-provision storage. Instead, it automatically provisions storage when it is requested by users.
-
+Dynamic volume provisioning allows storage volumes to be created on-demand. Without dynamic provisioning, cluster adm have to manually make calls to their cloud or storage providers to create new storage volumes, and then create PV objects to represent them in kubernetes. The dynamic provisioning feature eliminates the needs for cluster adm to pre-provision storage. Instead, it automatically provisions storage when it is requested by users.
 <br>
 A PersistentVolumeClaim (PVC) is a request for storage by a user which can be attained from PV. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany or ReadWriteMany.
 
 ### Short and Simple
 
 Persistent Volume - Available storage let's say you have 100Gi
+<br>
 Persistent Volume Claim - You request from Persistent Volume, let's say you request 10Gi you'll get it but if you request 110Gi you won't get it.
 
 ## CronJob
